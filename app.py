@@ -7,13 +7,15 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 # 1. Load the Hugging Face model, tokenizer, and label encoder
 @st.cache_resource 
 def load_models():
-    # Pastikan file model (.safetensors, tokenizer.json, config.json, dll) 
-    # dan label_encoder.pkl berada di satu folder yang sama (misal di folder root atau "./")
-    model_path = "./" 
+    # Replace with your actual Hugging Face username and model name
+    hf_model_path = "MightyHazEl/CyberBullyDetection" 
     
-    tokenizer = AutoTokenizer.from_pretrained(model_path)
-    model = AutoModelForSequenceClassification.from_pretrained(model_path)
-    label_encoder = joblib.load(f'{model_path}label_encoder.pkl')
+    # Load model and tokenizer directly from Hugging Face Hub
+    tokenizer = AutoTokenizer.from_pretrained(hf_model_path)
+    model = AutoModelForSequenceClassification.from_pretrained(hf_model_path)
+    
+    # The label_encoder.pkl still loads from your local GitHub repository root
+    label_encoder = joblib.load('label_encoder.pkl')
     
     return model, tokenizer, label_encoder
 
@@ -26,6 +28,8 @@ def clean_text(text):
     text = re.sub(r'\@\w+|\#', '', text)
     text = re.sub(r'[^\w\s]', '', text)
     return text
+
+# ... (The rest of your Streamlit UI code stays exactly the same) ...
 
 # ==========================================
 # USER INTERFACE STREAMLIT
