@@ -70,7 +70,8 @@ if st.button("Analisis Teks"):
             st.markdown("---")
             st.subheader("Hasil Analisis:")
             
-            if prediction == "not_cyberbullying":
+            # Ubah kondisi if ini untuk menangkap label "bukan_cyberbullying"
+            if "bukan" in prediction.lower() or "not" in prediction.lower():
                 st.success(f"✅ **Aman!** Teks ini terdeteksi TIDAK mengandung unsur cyberbullying.")
                 st.info(f"**Confidence Score:** {confidence_score:.2f}%")
             else:
